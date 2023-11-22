@@ -8,7 +8,7 @@ import json
 import requests
 
 from datetime import datetime
-from .bus_data_process import (
+from bus_data_process import (
     get_bus_data_from_feed,
     get_geo_fences,
     get_monitored_format,
@@ -17,10 +17,12 @@ from .bus_data_process import (
     trigger_logic_app,
 )
 
-AZURE_CONN_STRING: str = os.environ["AzureSQLConnectionString"]
-GTFS_REAL_TIME_FEED: str = os.environ["RealTimeFeedUrl"]
-LOGIC_APP_URL: str = os.environ.get("LogicAppUrl", "")
-
+#AZURE_CONN_STRING: str = os.environ["AzureSQLConnectionString"]
+AZURE_CONN_STRING: str ="Driver={ODBC Driver 17 for SQL Server};Server=tcp:bus-server705154,1433;Database=bus-db;Uid=cloudadmin;Pwd=LearningAzure@Bismart2023!;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+#GTFS_REAL_TIME_FEED: str = os.environ["RealTimeFeedUrl"]
+GTFS_REAL_TIME_FEED: str = "https://s3.amazonaws.com/kcm-alerts-realtime-prod/vehiclepositions_enhanced.json"
+#LOGIC_APP_URL: str = os.environ.get("LogicAppUrl", "")
+LOGIC_APP_URL: str = ""
 
 def main(GetBusData: func.TimerRequest) -> None:
     """Retrieve the routes we want to monitor from the SQL Database"""
